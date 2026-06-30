@@ -1,0 +1,25 @@
+name: Bot Fstats
+on:
+  schedule:
+    - cron: '0 9 * * *' # Corre todos los días a las 9 AM
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install chromium
+      - name: Run script
+        env:
+          FSTATS_USER: ${{ secrets.FSTATS_USER }}
+          FSTATS_PASS: ${{ secrets.FSTATS_PASS }}
+        run: python main.py
+        
