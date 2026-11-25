@@ -1,7 +1,5 @@
 name: Bot Fstats
 on:
-  schedule:
-    - cron: '0 9 * * *' # Corre todos los días a las 9 AM
   workflow_dispatch:
 
 jobs:
